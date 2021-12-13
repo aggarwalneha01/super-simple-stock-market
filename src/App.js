@@ -1,5 +1,8 @@
+import React from "react";
 import './App.css';
 import {  Header } from 'semantic-ui-react';
+import stocksData from "./data/stocksData";
+import Stocks from "./Stocks";
 
 function App() {
   return (
@@ -8,6 +11,7 @@ function App() {
         <Header.Content content='Super Simple Stock Market' >
         </Header.Content>
       </Header>
+      <Stocks stocks={stocksData}/>
     </div>
   );
 }
