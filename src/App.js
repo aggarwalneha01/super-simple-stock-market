@@ -6,7 +6,6 @@ import Trades from "./Trades"
 
 const App = () => {
   const [trades, setTrades]=useState([]);
-  console.log("trades", trades);
 
   const handleTrades = (trade) => {
     setTrades([

@@ -1,17 +1,23 @@
 import React from 'react';
 import { Table, Container } from 'semantic-ui-react';
+import moment from 'moment';
 
 const Trades = ({trades}) =>{
-   const renderTradeRows = trades.map((trade, i)=>{ 
-    return (
-        <Table.Row key={i}>
-                <Table.Cell>{trade.tradeTime}</Table.Cell>
-                <Table.Cell>{trade.stockSymbol}</Table.Cell>
-                <Table.Cell>{trade.action}</Table.Cell>
-                <Table.Cell>{trade.stockPrice}</Table.Cell>
-                <Table.Cell>{trade.stockQuantity}</Table.Cell>
-                <Table.Cell>{trade.totalPrice}</Table.Cell>
-        </Table.Row>)}
+   const renderTradeRows = trades.map((trade, i) => { 
+       const now = moment(Date.now()); 
+       const diff = now.diff(trade.tradeTime, 'minutes');
+       if(diff < 15){
+        return (
+            <Table.Row key={i}>
+                    <Table.Cell>{moment(trade.tradeTime).format("MMMM Do YYYY, h:mm:ss")}</Table.Cell>
+                    <Table.Cell>{trade.stockSymbol}</Table.Cell>
+                    <Table.Cell>{trade.action}</Table.Cell>
+                    <Table.Cell>{trade.stockPrice}</Table.Cell>
+                    <Table.Cell>{trade.stockQuantity}</Table.Cell>
+                    <Table.Cell>{trade.totalPrice}</Table.Cell>
+            </Table.Row>)}
+        return null
+        }
     )
     return (
         <div>

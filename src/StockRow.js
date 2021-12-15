@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Table, Input, Button, Label } from 'semantic-ui-react';
-import { getDividendYield, getPERatio, getDateTime } from './helpers/get-values';
+import { getDividendYield, getPERatio } from './helpers/get-values';
+import moment from 'moment';
 
 const StockRow =({stock, index, handleTrades}) => {
     const [price, setPrice] = useState(0);
@@ -17,7 +18,7 @@ const StockRow =({stock, index, handleTrades}) => {
                 setPriceError("Please enter numeric price");
             }
             else{
-                setQuantityError("Please enter numeric value");
+                setQuantityError("Please enter numeric quantity");
             }
         }
         else{
@@ -26,7 +27,7 @@ const StockRow =({stock, index, handleTrades}) => {
             const stockQuantity = quantity
             const action = e.target.name
             const totalPrice = stockPrice * stockQuantity
-            const tradeTime = getDateTime()
+            const tradeTime = moment(Date.now());   
 
             const newTrade={stockSymbol,stockPrice, stockQuantity, action, totalPrice, tradeTime };
             handleTrades(newTrade);
