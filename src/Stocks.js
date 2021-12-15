@@ -3,15 +3,15 @@ import { Table } from 'semantic-ui-react';
 import stocksData from "./data/stocksData";
 import StockRow from './StockRow';
 
-const Stocks = () => {
+const Stocks = ({handleTrades}) => {
     const renderRows = stocksData.map((stock, index)=>{
-        return <StockRow key={index} stock={stock}/>
+        return <StockRow key={index} stock={stock} handleTrades={handleTrades}/>
     })
     return (
         <div>
             <h1>Stocks Table</h1>
-            <Table celled>
-                <Table.Header>
+            <Table celled striped color="blue">
+                <Table.Header color="blue">
                     <Table.Row>
                         <Table.HeaderCell>Stock Symbol</Table.HeaderCell>
                         <Table.HeaderCell>Type</Table.HeaderCell>
@@ -30,22 +30,6 @@ const Stocks = () => {
 
                 <Table.Body>
                     {renderRows}
-                    {/* {stocksData.map((item, i) => {
-                    return(<Table.Row key={i}>
-                        <Table.Cell>{item.symbol}</Table.Cell>
-                        <Table.Cell>{item.type}</Table.Cell>
-                        <Table.Cell>{item.lastDividend}</Table.Cell>
-                        <Table.Cell>{item.fixedDividend}</Table.Cell>
-                        <Table.Cell>{item.parValue}</Table.Cell>
-                        <Table.Cell>----</Table.Cell>
-                        <Table.Cell>----</Table.Cell>
-                        <Table.Cell>----</Table.Cell>
-                        <Table.Cell>----</Table.Cell>
-                        <Table.Cell>----</Table.Cell>
-                        <Table.Cell>---</Table.Cell>
-                        <Table.Cell>----</Table.Cell>
-                    </Table.Row>
-                    )})} */}
                 </Table.Body>
   </Table>
         </div>
