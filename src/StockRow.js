@@ -8,9 +8,7 @@ const StockRow =({stock, index, handleTrades}) => {
     const [quantity, setQuantity] = useState(0);
     const [priceError, setPriceError] = useState('');
     const [quantityError, setQuantityError] = useState('');
-    const [dividendYield, setDividendYield] = useState('');
-    const [PERatio, setPERatio] = useState('')
-
+   
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!price || isNaN(price) ||!quantity ||isNaN(quantity)){
@@ -27,13 +25,13 @@ const StockRow =({stock, index, handleTrades}) => {
             const stockQuantity = quantity
             const action = e.target.name
             const totalPrice = stockPrice * stockQuantity
-            const tradeTime = moment(Date.now());   
-
-            const newTrade={stockSymbol,stockPrice, stockQuantity, action, totalPrice, tradeTime };
-            handleTrades(newTrade);
+            const tradeTime = moment(Date.now());  
             const DY = getDividendYield(stock.type, stock.lastDividend, stock.fixedDividend, price, stock.parValue)
-            setDividendYield(DY);
-            setPERatio(getPERatio(DY, price))
+            const PERatio = getPERatio(DY, price);
+
+            const newTrade={stockSymbol,stockPrice, stockQuantity, action, totalPrice, tradeTime, DY, PERatio};
+            handleTrades(newTrade);
+            
         }
     }
     return (
@@ -47,8 +45,6 @@ const StockRow =({stock, index, handleTrades}) => {
                     <Input type="text" value={price} onChange={(e) => setPrice(e.target.value)} color="blue"/>
                    {priceError &&<Label basic color='red' pointing> {priceError}</Label>}
                 </Table.Cell>
-                <Table.Cell>{dividendYield}</Table.Cell>
-                <Table.Cell>{PERatio}</Table.Cell>
                 <Table.Cell>GM</Table.Cell>
                 <Table.Cell>VWS Price</Table.Cell>
                 <Table.Cell>

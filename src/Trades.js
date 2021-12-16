@@ -1,13 +1,15 @@
 import React from 'react';
 import { Table, Container } from 'semantic-ui-react';
 import moment from 'moment';
+import { getVWSPrice } from './helpers/get-values';
 
 const Trades = ({trades}) =>{
-   const renderTradeRows = trades.map((trade, i) => { 
-       const now = moment(Date.now()); 
-       const diff = now.diff(trade.tradeTime, 'minutes');
-       if(diff < 15){
-        return (
+    const renderTradeRows = trades.map((trade, i) => { 
+        const now = moment(Date.now()); 
+        const diff = now.diff(trades.tradeTime, 'minutes');
+        const filteredTrades = trades.filter(tra =>{ return tra.stockSymbol===trade.stockSymbol && diff<=15});
+        const VWSPrice = getVWSPrice(filteredTrades);
+       return (
             <Table.Row key={i}>
                     <Table.Cell>{moment(trade.tradeTime).format("MMMM Do YYYY, h:mm:ss")}</Table.Cell>
                     <Table.Cell>{trade.stockSymbol}</Table.Cell>
@@ -15,10 +17,11 @@ const Trades = ({trades}) =>{
                     <Table.Cell>{trade.stockPrice}</Table.Cell>
                     <Table.Cell>{trade.stockQuantity}</Table.Cell>
                     <Table.Cell>{trade.totalPrice}</Table.Cell>
+                    <Table.Cell>{trade.DY}</Table.Cell>
+                    <Table.Cell>{trade.PERatio}</Table.Cell>
+                    <Table.Cell>{VWSPrice}</Table.Cell>
             </Table.Row>)}
-        return null
-        }
-    )
+         )
     return (
         <div>
             {(trades.length > 0) && (
@@ -33,6 +36,11 @@ const Trades = ({trades}) =>{
                             <Table.HeaderCell>Price</Table.HeaderCell>
                             <Table.HeaderCell>Quantity</Table.HeaderCell>
                             <Table.HeaderCell>Total Price</Table.HeaderCell>
+                            <Table.HeaderCell>Dividend Yield</Table.HeaderCell>
+                            <Table.HeaderCell>PE Ratio</Table.HeaderCell>
+                            <Table.HeaderCell>Volume Weighted Stock Price</Table.HeaderCell>
+                            <Table.HeaderCell>Geometric Mean</Table.HeaderCell>
+                            
                         </Table.Row>
                     </Table.Header>
 
