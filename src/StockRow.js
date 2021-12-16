@@ -45,8 +45,6 @@ const StockRow =({stock, index, handleTrades}) => {
                     <Input type="text" value={price} onChange={(e) => setPrice(e.target.value)} color="blue"/>
                    {priceError &&<Label basic color='red' pointing> {priceError}</Label>}
                 </Table.Cell>
-                <Table.Cell>GM</Table.Cell>
-                <Table.Cell>VWS Price</Table.Cell>
                 <Table.Cell>
                     <Input type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} color="blue"/>
                     {quantityError &&<Label basic color='red' pointing> {quantityError}</Label>}

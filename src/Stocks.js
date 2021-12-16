@@ -19,8 +19,6 @@ const Stocks = ({handleTrades}) => {
                         <Table.HeaderCell>Fixed Dividend</Table.HeaderCell>
                         <Table.HeaderCell>Par Value</Table.HeaderCell>
                         <Table.HeaderCell>Price</Table.HeaderCell>
-                        <Table.HeaderCell>Geometric Mean</Table.HeaderCell>
-                        <Table.HeaderCell>Volume Weighted Stock Price</Table.HeaderCell>
                         <Table.HeaderCell>Quantity</Table.HeaderCell>
                         <Table.HeaderCell>Buy/Sell</Table.HeaderCell>
                     </Table.Row>
