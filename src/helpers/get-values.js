@@ -21,3 +21,11 @@ export const getVWSPrice = (trades) => {
     }
     return VWSPriceDividend / VSWPriceDivisor;
 }
+
+export const getGeometricMean = (trades) =>{
+    let geometricMean = 1;
+    for (let trade of trades){
+        geometricMean *= trade.stockPrice;
+    }
+    return Math.pow(geometricMean, 1 / trades.length); 
+}

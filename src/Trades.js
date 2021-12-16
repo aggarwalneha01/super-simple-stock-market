@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Container } from 'semantic-ui-react';
 import moment from 'moment';
-import { getVWSPrice } from './helpers/get-values';
+import { getVWSPrice, getGeometricMean } from './helpers/get-values';
 
 const Trades = ({trades}) =>{
     const renderTradeRows = trades.map((trade, i) => { 
@@ -9,6 +9,7 @@ const Trades = ({trades}) =>{
         const diff = now.diff(trades.tradeTime, 'minutes');
         const filteredTrades = trades.filter(tra =>{ return tra.stockSymbol===trade.stockSymbol && diff<=15});
         const VWSPrice = getVWSPrice(filteredTrades);
+        const geometricMean = getGeometricMean(trades);
        return (
             <Table.Row key={i}>
                     <Table.Cell>{moment(trade.tradeTime).format("MMMM Do YYYY, h:mm:ss")}</Table.Cell>
@@ -20,6 +21,7 @@ const Trades = ({trades}) =>{
                     <Table.Cell>{trade.DY}</Table.Cell>
                     <Table.Cell>{trade.PERatio}</Table.Cell>
                     <Table.Cell>{VWSPrice}</Table.Cell>
+                    <Table.Cell>{geometricMean}</Table.Cell>
             </Table.Row>)}
          )
     return (
